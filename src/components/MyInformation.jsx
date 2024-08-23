@@ -232,7 +232,7 @@ const MyInformation = ({ isEditable, userData, setUserData }) => {
               disabled={!isEditable}
             />
             <DuplicateButton onClick={handleIdDuplicate}>
-              중복 확인
+              중복확인
             </DuplicateButton>
           </InputContainer>
           <Divider />
