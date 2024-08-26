@@ -103,7 +103,7 @@ const ButtonPNG = styled.img`
 
 const EmptyBox = styled.div`
   background-color: #fee5ce;
-  color:#ff7b00;
+  color: #ff7b00;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -136,7 +136,7 @@ const Pagination = ({ userId, onPostClick }) => {
 
       try {
         const response = await axios.get(
-          "https://dahaessyu.kro.kr/blog/main/",
+          "https://healthwarning.kro.kr/blog/main/",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -169,9 +169,7 @@ const Pagination = ({ userId, onPostClick }) => {
             ))}
           </PostListContainer>
         ) : (
-          <EmptyBox>
-            등록된 포스트가 없습니다
-          </EmptyBox>
+          <EmptyBox>등록된 포스트가 없습니다</EmptyBox>
         )}
       </Background>
       <PostButtonContainer>

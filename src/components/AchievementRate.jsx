@@ -36,21 +36,23 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 `;
 
 const PercentContainer = styled.div`
-  width: 50%;
-  padding: 10px;
+  width: 80%;
+  height: 220px;
+  padding: 20px;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
   cursor: pointer;
-  height: 450px;
-  margin-bottom: 50px;
-  margin-top: 50px;
+  margin-bottom: 10px;
+  margin-top: 20px;
 `;
 
 const PercentText = styled.p`
@@ -114,7 +116,7 @@ const CardImage = styled.img`
 
 const Header = styled.div`
   width: 100%;
-  height: 60px;
+  height: 35px;
   background: linear-gradient(to right, #ff832b, #ffb74d);
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -237,7 +239,7 @@ const AchievementRate = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `https://dahaessyu.kro.kr/blog/posts/${post_id}`,
+          `https://healthwarning.kro.kr/blog/posts/${post_id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

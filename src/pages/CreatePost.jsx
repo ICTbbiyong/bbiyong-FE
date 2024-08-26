@@ -28,12 +28,12 @@ const Wrapper = styled.div`
 `;
 
 const PostHeader = styled.div`
- display: flex;
- justify-content: center;
- align-items: center;
- background-color: #ffe3b0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffe3b0;
   font-size: 100px;
-  color:#f4a003;
+  color: #f4a003;
   font-family: "Nanum Pen Script", cursive;
   width: 100%;
   height: 300px;
@@ -50,18 +50,18 @@ const InfoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  flex-direction:row;
+  flex-direction: row;
 `;
 
 const CheckListContainer = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 const DairyContainer = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -246,7 +246,7 @@ function CreatePost() {
         const token = localStorage.getItem("token");
         console.log("Token:", token); // 로컬 스토리지에서 토큰을 가져옵니다.
         const response = await axios.get(
-          `https://dahaessyu.kro.kr/users/profile/`,
+          `https://healthwarning.kro.kr/users/profile/`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // 요청 헤더에 토큰을 포함시킵니다.
@@ -287,7 +287,7 @@ function CreatePost() {
 
     try {
       const response = await axios.post(
-        "https://dahaessyu.kro.kr/blog/create/",
+        "https://healthwarning.kro.kr/blog/create/",
         postData,
         {
           headers: {
@@ -306,94 +306,111 @@ function CreatePost() {
 
   const handleNumberInput = (e, setter, max) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value) && (max === undefined || value === "" || Number(value) <= max)) {
+    if (
+      /^\d*$/.test(value) &&
+      (max === undefined || value === "" || Number(value) <= max)
+    ) {
       setter(value);
     }
   };
 
   return (
-  <AnimatedContainer isVisible={isVisible}>
-  <Wrapper>
-   <PostHeader>
-    <Pencil src={Pen}/>"매일매일 기록하는 오늘의 건강 일기"
-   </PostHeader> 
-   <InfoWrapper>
-    <CheckListContainer>
-      <CheckListTitle>
-        <YYYY
-          placeholder="YYYY"
-          maxLength={4} 
-          value={date.year}
-          onChange={(e) =>
-            handleNumberInput(e, (value) => setDate({ ...date, year: value }))
-          }
-        />
-        년
-        <MMDD
-          placeholder="MM"
-          maxLength={2} 
-          value={date.month}
-          onChange={(e) =>
-            handleNumberInput(e, (value) => setDate({ ...date, month: value }), 12)
-          }
-        />
-        월
-        <MMDD
-          placeholder="DD"
-          maxLength={2} 
-          value={date.day}
-          onChange={(e) =>
-            handleNumberInput(e, (value) => setDate({ ...date, day: value }), 31)
-          }
-        />
-        일
-      </CheckListTitle>
-      <CheckList>
-        <SleepBox>
-          목표 수면 시간 <GoalBox>{data.sleep}</GoalBox>시간 중
-          <Input
-            value={sleep}
-            onChange={(e) => handleNumberInput(e, setSleep, 24)}
-          />
-          시간 수면함
-        </SleepBox>
-        <MedicationsBox>
-          목표 복약 횟수 <GoalBox>{data.medications}</GoalBox>회 중
-          <Input
-            value={medication}
-            onChange={(e) => handleNumberInput(e, setMedication, 99)}
-          />
-          회 복용함
-        </MedicationsBox>
-        <ExerciseBox>
-          목표 운동 시간 <GoalBox>{data.exercises}</GoalBox>분 중
-          <Input
-            value={exercise}
-            onChange={(e) => handleNumberInput(e, setExercise, 1440)}
-          />
-          분 운동함
-        </ExerciseBox>
-        <MealsBox>
-          목표 식사 횟수 <GoalBox>{data.meals}</GoalBox>끼 중
-          <Input value={meal} onChange={(e) => handleNumberInput(e, setMeal, 10)} />
-          끼 식사함
-        </MealsBox>
-      </CheckList>
-    </CheckListContainer> 
-    <DairyContainer>
-      <DiaryTitle>어떤 하루를 보내셨나요?</DiaryTitle>
-      <DiaryInput
-        placeholder="특이사항이나 오늘의 기분 등을 작성해주세요!"
-        value={diary}
-        onChange={(e) => setDiary(e.target.value)}
-      />
-    </DairyContainer>
-  </InfoWrapper>
-  <PostButtonContainer>
-    <PostButton onClick={handleSubmit}>등록하기</PostButton>
-  </PostButtonContainer>  
-</Wrapper>
-</AnimatedContainer>
+    <AnimatedContainer isVisible={isVisible}>
+      <Wrapper>
+        <PostHeader>
+          <Pencil src={Pen} />
+          "매일매일 기록하는 오늘의 건강 일기"
+        </PostHeader>
+        <InfoWrapper>
+          <CheckListContainer>
+            <CheckListTitle>
+              <YYYY
+                placeholder="YYYY"
+                maxLength={4}
+                value={date.year}
+                onChange={(e) =>
+                  handleNumberInput(e, (value) =>
+                    setDate({ ...date, year: value })
+                  )
+                }
+              />
+              년
+              <MMDD
+                placeholder="MM"
+                maxLength={2}
+                value={date.month}
+                onChange={(e) =>
+                  handleNumberInput(
+                    e,
+                    (value) => setDate({ ...date, month: value }),
+                    12
+                  )
+                }
+              />
+              월
+              <MMDD
+                placeholder="DD"
+                maxLength={2}
+                value={date.day}
+                onChange={(e) =>
+                  handleNumberInput(
+                    e,
+                    (value) => setDate({ ...date, day: value }),
+                    31
+                  )
+                }
+              />
+              일
+            </CheckListTitle>
+            <CheckList>
+              <SleepBox>
+                목표 수면 시간 <GoalBox>{data.sleep}</GoalBox>시간 중
+                <Input
+                  value={sleep}
+                  onChange={(e) => handleNumberInput(e, setSleep, 24)}
+                />
+                시간 수면함
+              </SleepBox>
+              <MedicationsBox>
+                목표 복약 횟수 <GoalBox>{data.medications}</GoalBox>회 중
+                <Input
+                  value={medication}
+                  onChange={(e) => handleNumberInput(e, setMedication, 99)}
+                />
+                회 복용함
+              </MedicationsBox>
+              <ExerciseBox>
+                목표 운동 시간 <GoalBox>{data.exercises}</GoalBox>분 중
+                <Input
+                  value={exercise}
+                  onChange={(e) => handleNumberInput(e, setExercise, 1440)}
+                />
+                분 운동함
+              </ExerciseBox>
+              <MealsBox>
+                목표 식사 횟수 <GoalBox>{data.meals}</GoalBox>끼 중
+                <Input
+                  value={meal}
+                  onChange={(e) => handleNumberInput(e, setMeal, 10)}
+                />
+                끼 식사함
+              </MealsBox>
+            </CheckList>
+          </CheckListContainer>
+          <DairyContainer>
+            <DiaryTitle>어떤 하루를 보내셨나요?</DiaryTitle>
+            <DiaryInput
+              placeholder="특이사항이나 오늘의 기분 등을 작성해주세요!"
+              value={diary}
+              onChange={(e) => setDiary(e.target.value)}
+            />
+          </DairyContainer>
+        </InfoWrapper>
+        <PostButtonContainer>
+          <PostButton onClick={handleSubmit}>등록하기</PostButton>
+        </PostButtonContainer>
+      </Wrapper>
+    </AnimatedContainer>
   );
 }
 

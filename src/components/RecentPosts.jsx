@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
-import axios from 'axios';
+import styled from "styled-components";
+import axios from "axios";
 import RecentPostCard from "./RecentPostCard";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,7 @@ const LeftButton = styled.img`
   cursor: pointer;
   filter: invert(0.3) sepia(0.5) saturate(0.1) hue-rotate(0deg);
 
-  &:hover{
+  &:hover {
     width: 63px;
     height: 63px;
     margin-right: 0px;
@@ -43,7 +43,7 @@ const RightButton = styled.img`
   cursor: pointer;
   filter: invert(0.3) sepia(0.5) saturate(0.1) hue-rotate(0deg);
 
-  &:hover{
+  &:hover {
     width: 63px;
     height: 63px;
     margin-right: 0;
@@ -64,7 +64,7 @@ const MissYouButton = styled.img`
   cursor: pointer;
 
   &:hover {
-    content: url('${process.env.PUBLIC_URL}/missyou-1.png');
+    content: url("${process.env.PUBLIC_URL}/missyou-1.png");
     width: 200px;
     height: 160px;
     margin-bottom: 20px;
@@ -89,19 +89,22 @@ const RecentPosts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://dahaessyu.kro.kr/blog/main/`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+        const response = await axios.get(
+          `https://healthwarning.kro.kr/blog/main/`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
           }
-        });
+        );
         if (response.status === 200) {
           setPosts(response.data.posts.slice(0, 10));
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          console.error('Authentication failed');
+          console.error("Authentication failed");
         } else {
-          console.error('Failed to fetch data');
+          console.error("Failed to fetch data");
         }
       }
     };
@@ -110,34 +113,41 @@ const RecentPosts = () => {
   }, []);
 
   const handleLeftClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? posts.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? posts.length - 1 : prevIndex - 1
+    );
   };
 
   const handleRightClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === posts.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === posts.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   const handleMissYouClick = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`https://dahaessyu.kro.kr/blog/miss_email/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `https://healthwarning.kro.kr/blog/miss_email/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.status === 200) {
-        alert('Email sent successfully');
+        alert("Email sent successfully");
       } else {
-        throw new Error('Failed to send email');
+        throw new Error("Failed to send email");
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        console.error('Not Found');
-        alert('User not found');
+        console.error("Not Found");
+        alert("User not found");
       } else {
-        console.error('An error occurred:', error);
-        alert('An error occurred while sending the email');
+        console.error("An error occurred:", error);
+        alert("An error occurred while sending the email");
       }
     }
   };
@@ -150,17 +160,33 @@ const RecentPosts = () => {
   return (
     <MainContainer>
       <RecentPostsContainer>
-        <LeftButton src={`${process.env.PUBLIC_URL}/leftbutton.png`} alt="left" onClick={handleLeftClick}/>
+        <LeftButton
+          src={`${process.env.PUBLIC_URL}/leftbutton.png`}
+          alt="left"
+          onClick={handleLeftClick}
+        />
         {posts.length > 0 ? (
-          <RecentPostCard post={posts[currentIndex]} onClick={handlePostClick}/>
+          <RecentPostCard
+            post={posts[currentIndex]}
+            onClick={handlePostClick}
+          />
         ) : (
           <EmptyBox>
-            <HighLight>'오늘의 글 작성'</HighLight>을 눌러 첫 게시글을 작성해보세요!
+            <HighLight>'오늘의 글 작성'</HighLight>을 눌러 첫 게시글을
+            작성해보세요!
           </EmptyBox> // 데이터를 불러오지 못했을 때 빈 박스 표시
         )}
-        <RightButton src={`${process.env.PUBLIC_URL}/rightbutton.png`} alt="right" onClick={handleRightClick}/>
+        <RightButton
+          src={`${process.env.PUBLIC_URL}/rightbutton.png`}
+          alt="right"
+          onClick={handleRightClick}
+        />
       </RecentPostsContainer>
-      <MissYouButton src={`${process.env.PUBLIC_URL}/missyou-2.png`} alt="heart" onClick={handleMissYouClick}/>
+      <MissYouButton
+        src={`${process.env.PUBLIC_URL}/missyou-2.png`}
+        alt="heart"
+        onClick={handleMissYouClick}
+      />
     </MainContainer>
   );
 };

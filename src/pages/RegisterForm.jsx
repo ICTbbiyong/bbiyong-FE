@@ -128,7 +128,7 @@ const RegisterForm = () => {
       };
 
       const response = await axios.post(
-        "https://dahaessyu.kro.kr/users/signup/",
+        "https://healthwarning.kro.kr/users/signup/",
         requestData
       );
 
@@ -174,7 +174,6 @@ const RegisterForm = () => {
         setBirth={setBirth}
         gender={gender}
         setGender={setGender}
-        isVisible={isVisible}
       />
       <RegisterInfo
         sleep={sleep}

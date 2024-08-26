@@ -22,8 +22,8 @@ root.render(
           <Route index element={<Main />} />
           <Route path="LoginForm" element={<LoginForm />} />
           <Route path="CreatePost" element={<CreatePost />} />
-          <Route path="EditProfile/" element={<EditProfile />} />
-          <Route path="post/:post_id" element={<Post />} />
+          <Route path="EditProfile/:userId" element={<EditProfile />} />
+          <Route path="post/" element={<Post />} />
           <Route path="PostList/:userId" element={<PostList />} />
           <Route path="RegisterForm" element={<RegisterForm />} />
           <Route path="*" element={<NotFound />} />
